@@ -1,0 +1,5 @@
+.vagrant
+/nodes
+
+.kitchen/
+.kitchen.local.yml
