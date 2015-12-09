@@ -1,7 +1,5 @@
 remote_file "/tmp/grannydb.sql" do
 	source 'https://s3-us-west-2.amazonaws.com/artifacts-eochoa260/grannydb.sql'
-	owner 'vagrant'
-	group 'vagrant'
 	mode '0775'
 end
 
