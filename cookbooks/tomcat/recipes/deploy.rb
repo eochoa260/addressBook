@@ -11,6 +11,6 @@ end
 
 execute "start tomcat" do
 	action :run
-	cwd '/opt/tomcat/apache-tomcat-7.0.65/bin''
+	cwd '/opt/tomcat/apache-tomcat-7.0.65/bin'
 	command "./startup.sh"
 end
