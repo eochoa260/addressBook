@@ -1,0 +1,18 @@
+{
+    "name": "tomcat",
+    "description": "This role will install and configure Tomcat",
+    "chef_type": "role",
+    "json_class": "Chef::Role",
+    "default_attributes": {
+        "artifact" : {
+            "base": {
+                "url": "https://s3-us-west-2.amazonaws.com/artifacts-eochoa260"
+            }
+        }
+    },
+    "override_attributes": {
+    },
+    "run_list": [
+        "recipe[tomcat]"
+    ]
+}

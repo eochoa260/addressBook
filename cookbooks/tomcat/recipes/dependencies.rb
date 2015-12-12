@@ -10,10 +10,18 @@ execute "Install ld-linux.so.2" do
 	not_if{Dir.exist?('/lib/ld-linux.so.2')}
 end
 
+node['tomcat']['dependencies'].each do |dependency, path|
+	execute "Install #{dependency}" do
+		action :run
+		command "yum -y install #{dependency}"
+		not_if{Dir.exist?("#{path}/#{dependency}")}
+	end
+end
+
 execute "copy mysql-connector-java.jar to tomcat lib" do
 	action :run
-	cwd '/opt/tomcat/apache-tomcat-7.0.65/lib'
+	cwd "#{node['tomcat']['install']['path']}/lib"
 	command "cp /usr/share/java/mysql-connector-java.jar ."
-	not_if{Dir.exist?('/opt/tomcat/apache-tomcat-7.0.65/mysql-connector-java.jar')}
+	not_if{Dir.exist?("#{node['tomcat']['install']['path']}/mysql-connector-java.jar")}
 end
 

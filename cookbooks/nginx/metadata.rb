@@ -1,5 +1,5 @@
 name             'nginx'
-maintainer       'YOUR_COMPANY_NAME'
+maintainer       'eochoa260'
 maintainer_email 'YOUR_EMAIL'
 license          'All rights reserved'
 description      'Installs/Configures nginx'

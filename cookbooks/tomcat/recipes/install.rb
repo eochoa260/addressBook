@@ -1,28 +1,37 @@
-directory '/opt/tomcat/' do
+#
+# Cookbook Name:: tomcat
+# Recipe:: config
+#
+# Copyright 2015, eochoa260
+#
+# All rights reserved - Do Not Redistribute
+#
+
+directory node['tomcat']['base']['path'] do
 	action :create
 	mode '0755'
 end
 
-remote_file "/opt/tomcat/jre-7u79-linux-i586.tar" do
-	source 'https://s3-us-west-2.amazonaws.com/artifacts-eochoa260/jre-7u79-linux-i586.tar'
+remote_file "#{node['tomcat']['base']['path']}/#{node['tomcat']['java']['install']['tar']}" do
+	source node['tomcat']['java']['tar']['url']
 	mode '0775'
 end
 
 execute "untar java binary" do
 	action :run
-	cwd '/opt/tomcat'
-	command "tar xvf jre-7u79-linux-i586.tar"
-	not_if{Dir.exist?('/opt/tomcat/jre1.7.0_79')}
+	cwd node['tomcat']['base']['path']
+	command "tar xvf #{node['tomcat']['java']['install']['tar']}"
+	not_if{Dir.exist?(node['tomcat']['java']['install']['path'])}
 end
 
-remote_file "/opt/tomcat/apache-tomcat-7.0.65.tar" do
-	source 'https://s3-us-west-2.amazonaws.com/artifacts-eochoa260/apache-tomcat-7.0.65.tar'
+remote_file "#{node['tomcat']['base']['path']}/#{node['tomcat']['install']['tar']}" do
+	source node['tomcat']['tar']['url']
 	mode '0775'
 end
 
-execute "untar apache-tomcat-7.0.65.tar" do
+execute "untar #{node['tomcat']['install']['tar']}" do
 	action :run
-	cwd '/opt/tomcat'
-	command "tar xvf apache-tomcat-7.0.65.tar"
-	not_if{Dir.exist?('/opt/tomcat/apache-tomcat-7.0.65')}
+	cwd node['tomcat']['base']['path']
+	command "tar xvf #{node['tomcat']['install']['tar']}"
+	not_if{Dir.exist?(node['tomcat']['install']['path'])}
 end
