@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: tomcat
-# Recipe:: config
+# Recipe:: install
 #
 # Copyright 2015, eochoa260
 #

@@ -1,14 +1,23 @@
-execute "Install mysql-connector-java" do
-	action :run
-	command "yum -y install mysql-connector-java"
-	not_if{Dir.exist?('/usr/share/java/mysql-connector-java.jar')}
-end
+#
+# Cookbook Name:: tomcat
+# Recipe:: dependencies
+#
+# Copyright 2015, eochoa260
+#
+# All rights reserved - Do Not Redistribute
+#
 
-execute "Install ld-linux.so.2" do
-	action :run
-	command "yum -y install /lib/ld-linux.so.2"
-	not_if{Dir.exist?('/lib/ld-linux.so.2')}
-end
+# execute "Install mysql-connector-java" do
+# 	action :run
+# 	command "yum -y install mysql-connector-java"
+# 	not_if{Dir.exist?('/usr/share/java/mysql-connector-java.jar')}
+# end
+
+# execute "Install ld-linux.so.2" do
+# 	action :run
+# 	command "yum -y install /lib/ld-linux.so.2"
+# 	not_if{Dir.exist?('/lib/ld-linux.so.2')}
+# end
 
 node['tomcat']['dependencies'].each do |dependency, path|
 	execute "Install #{dependency}" do

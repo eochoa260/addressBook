@@ -1,16 +1,25 @@
-remote_file "/opt/tomcat/apache-tomcat-7.0.65/webapps/granny.war" do
-	source 'https://s3-us-west-2.amazonaws.com/artifacts-eochoa260/granny.war'
+#
+# Cookbook Name:: tomcat
+# Recipe:: deploy
+#
+# Copyright 2015, eochoa260
+#
+# All rights reserved - Do Not Redistribute
+#
+
+remote_file "#{node['tomcat']['install']['path']}/webapps/granny.war" do
+	source node['tomcat']['granny']['artifact']['url']
 	mode '0775'
 end
 
 ruby_block "set java home" do
 	block do
-		ENV['JAVA_HOME'] = '/opt/tomcat/jre1.7.0_79'
+		ENV['JAVA_HOME'] = node['tomcat']['java']['install']['path']
 	end
 end
 
 execute "start tomcat" do
 	action :run
-	cwd '/opt/tomcat/apache-tomcat-7.0.65/bin'
+	cwd "#{node['tomcat']['install']['path']}/bin"
 	command "./startup.sh"
 end

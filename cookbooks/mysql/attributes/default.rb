@@ -8,6 +8,6 @@
 #
 
 default['mysql']['sql']['file']['name'] = 'grannydb.sql'
-default['mysql']['sql']['file']['url'] = "https://s3-us-west-2.amazonaws.com/artifacts-eochoa260/#{node['mysql']['sql']['file']['name']}"
+default['mysql']['sql']['file']['url'] = "#{node['artifact']['base']['url']}/#{node['mysql']['sql']['file']['name']}"
 default['mysql']['user'] = 'javauser'
 default['mysql']['password'] = 'javadude'
